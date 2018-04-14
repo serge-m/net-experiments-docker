@@ -38,13 +38,19 @@ services:
       EASYRSA_PKI: /ca/pki
     volumes:
        - ./ca:/ca
-  hub:
+  server:
     build:
       context: .
       dockerfile: base.docker
     environment:
-      SERVER_NAME: hub
-
+      SERVER_NAME: server
+      EASYRSA_PKI: /server/pki
+    volumes:
+      - ./server:/server
+    cap_add:
+      - NET_ADMIN 
+    devices: 
+      - /dev/net/tun
     networks:
      - red
      - blue

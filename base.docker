@@ -14,6 +14,14 @@ RUN pip install flask
 RUN mkdir -p /app
 WORKDIR /app
 
+
+##############################################################################################
+# required by openvpn server
+RUN mkdir -p /var/log/openvpn
+RUN adduser --system --no-create-home --home /nonexistent --disabled-login --group openvpn
+#############################################################################################
+
+
 COPY ./app/ /app
 COPY ./easyrsa/ /easyrsa
 
