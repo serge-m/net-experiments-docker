@@ -11,8 +11,9 @@ RUN update-alternatives --install /usr/bin/pip pip /usr/bin/pip3 1
 
 RUN pip install flask
 
-COPY server.py ./
-COPY ask.sh ./
+RUN mkdir -p /app
+WORKDIR /app
 
+COPY ./app/ ./
 
 ENTRYPOINT ./start_server.sh && /bin/bash
