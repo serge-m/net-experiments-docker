@@ -1,0 +1,22 @@
+version: '3'
+networks:
+  red:
+    driver: bridge
+services:
+  z1:
+    build:
+      context: .
+      dockerfile: base.docker
+    environment:
+      SERVER_NAME: z1
+    networks:
+     - red
+  z2:
+    build:
+      context: .
+      dockerfile: base.docker
+    environment:
+      SERVER_NAME: z2
+    networks:
+     - red
+    

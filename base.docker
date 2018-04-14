@@ -16,4 +16,4 @@ WORKDIR /app
 
 COPY ./app/ ./
 
-ENTRYPOINT ./start_server.sh && /bin/bash
+CMD ["./start_server.sh"]

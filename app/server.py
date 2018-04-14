@@ -20,6 +20,6 @@ def api_root():
 
 if __name__ == '__main__':
     print('Running {}'.format(server_name))
-    app.run(port=8080)
+    app.run(port=80, host='0.0.0.0')
 
 
