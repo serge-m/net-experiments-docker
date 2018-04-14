@@ -29,20 +29,22 @@ services:
       SERVER_NAME: blue1
     networks:
      - blue
-  blue2:
+  ca:
     build:
       context: .
       dockerfile: base.docker
     environment:
-      SERVER_NAME: blue2
-    networks:
-     - blue
+      SERVER_NAME: ca
+      EASYRSA_PKI: /ca/pki
+    volumes:
+       - ./ca:/ca
   hub:
     build:
       context: .
       dockerfile: base.docker
     environment:
       SERVER_NAME: hub
+
     networks:
      - red
      - blue
