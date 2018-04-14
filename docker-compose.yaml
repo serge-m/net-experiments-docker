@@ -2,21 +2,48 @@ version: '3'
 networks:
   red:
     driver: bridge
+  blue:
+    driver: bridge
 services:
-  z1:
+  red1:
     build:
       context: .
       dockerfile: base.docker
     environment:
-      SERVER_NAME: z1
+      SERVER_NAME: red1
     networks:
      - red
-  z2:
+  red2:
     build:
       context: .
       dockerfile: base.docker
     environment:
-      SERVER_NAME: z2
+      SERVER_NAME: red2
+    networks:
+     - red  
+  blue1:
+    build:
+      context: .
+      dockerfile: base.docker
+    environment:
+      SERVER_NAME: blue1
+    networks:
+     - blue
+  blue2:
+    build:
+      context: .
+      dockerfile: base.docker
+    environment:
+      SERVER_NAME: blue2
+    networks:
+     - blue
+  hub:
+    build:
+      context: .
+      dockerfile: base.docker
+    environment:
+      SERVER_NAME: hub
     networks:
      - red
-    
+     - blue
+  
