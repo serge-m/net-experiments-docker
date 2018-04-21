@@ -103,4 +103,5 @@ venv.bak/
 # mypy
 .mypy_cache/
 
-ca/**
+pki_persistent/**
+etc_persistent/**

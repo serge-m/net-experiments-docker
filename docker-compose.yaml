@@ -11,42 +11,68 @@ services:
       dockerfile: base.docker
     environment:
       SERVER_NAME: red1
+      EASYRSA_PKI: /pki/pki
     networks:
-     - red
+      - red
+    volumes:
+      - ./pki_persistent/red1/:/pki 
+      - ./etc_persistent/red1:/etc/openvpn/
+    devices: 
+      - /dev/net/tun
+    cap_add:
+      - NET_ADMIN 
   red2:
     build:
       context: .
       dockerfile: base.docker
     environment:
       SERVER_NAME: red2
+      EASYRSA_PKI: /pki/pki
     networks:
-     - red  
+      - red  
+      - blue
+    volumes:
+      - ./pki_persistent/red2/:/pki
+      - ./etc_persistent/red2:/etc/openvpn/
+    devices: 
+      - /dev/net/tun
+    cap_add:
+      - NET_ADMIN  
   blue1:
     build:
       context: .
       dockerfile: base.docker
     environment:
       SERVER_NAME: blue1
+      EASYRSA_PKI: /pki/pki
     networks:
-     - blue
+      - blue
+    volumes:
+      - ./pki_persistent/blue1/:/pki  
+      - ./etc_persistent/blue1:/etc/openvpn/
+    devices: 
+      - /dev/net/tun
+    cap_add:
+      - NET_ADMIN  
   ca:
     build:
       context: .
       dockerfile: base.docker
     environment:
       SERVER_NAME: ca
-      EASYRSA_PKI: /ca/pki
+      EASYRSA_PKI: /pki/pki
     volumes:
-       - ./ca:/ca
+       - ./pki_persistent/ca/:/pki
   server:
     build:
       context: .
       dockerfile: base.docker
     environment:
       SERVER_NAME: server
-      EASYRSA_PKI: /server/pki
+      EASYRSA_PKI: /pki/pki
     volumes:
-      - ./server:/server
+      - ./pki_persistent/server:/pki
+      - ./etc_persistent/server:/etc/openvpn/
     cap_add:
       - NET_ADMIN 
     devices: 

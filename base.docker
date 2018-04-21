@@ -4,7 +4,7 @@ RUN apt-get update && \
     apt-get upgrade -y && \
     apt-get clean
 
-RUN apt-get install -y openvpn iputils-ping vim mc curl
+RUN apt-get install -y openvpn iputils-ping vim mc curl traceroute iptables
 RUN apt-get install -y python3 python3-pip  
 RUN update-alternatives --install /usr/bin/python python /usr/bin/python3 1 
 RUN update-alternatives --install /usr/bin/pip pip /usr/bin/pip3 1 
