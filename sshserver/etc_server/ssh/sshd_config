@@ -132,3 +132,12 @@ Subsystem	sftp	/usr/lib/openssh/sftp-server
 #	AllowTcpForwarding no
 #	PermitTTY no
 #	ForceCommand cvs server
+
+
+### A special restricted user for tunneling testing
+Match User tunnel_user
+  AllowTcpForwarding yes
+  X11Forwarding no
+  AllowAgentForwarding no
+  ForceCommand /bin/false
+

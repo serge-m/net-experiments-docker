@@ -12,7 +12,9 @@ self-signed certificates. The procedure consists of
 * generating key pair for the client
 * adding the public key of the client to the server's authorized keys
 
-The code is listed in [generate_keys.sh](generate_keys.sh).
+Run
+
+    ./generate_keys.sh
 
 ## Running
 
