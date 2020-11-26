@@ -1,0 +1,23 @@
+version: "3.3"
+services:
+  serv:
+    build:
+      context: .
+      dockerfile: Dockerfile.server
+    ports:
+      - "30022:22"
+    networks:
+      - net1
+  clie:
+    build:
+      context: .
+      dockerfile: Dockerfile.client
+    ports:
+      - "31022:22"
+    volumes:
+      - ./app_client:/app
+    networks:
+      - net1
+
+networks:
+  net1:

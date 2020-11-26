@@ -1,0 +1,33 @@
+FROM ubuntu:20.04
+
+USER root
+
+ARG DEBIAN_FRONTEND=noninteractive
+
+
+RUN apt-get update && \
+    apt-get upgrade -y
+
+ARG DEPENDENCIES="openssh-server \
+                  vim \
+                  mc \
+                  curl \
+                  htop \
+                  sudo \
+                  iproute2\
+                  iputils-ping"
+
+RUN apt-get install -y ${DEPENDENCIES} && \
+    rm -rf /var/lib/apt/lists/*
+
+ADD etc_server/ssh /etc/ssh
+
+RUN useradd -rm -d /home/test -s /bin/bash -g root -G sudo -u 1000 test
+RUN  echo 'test:test' | chpasswd
+
+RUN service ssh start
+
+EXPOSE 22
+
+CMD ["/usr/sbin/sshd", "-D"]
+

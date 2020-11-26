@@ -1,0 +1,29 @@
+FROM ubuntu:20.04
+
+USER root
+
+ARG DEBIAN_FRONTEND=noninteractive
+
+
+RUN apt-get update && \
+    apt-get upgrade -y
+
+ARG DEPENDENCIES="openssh-server \
+                  vim \
+                  mc \
+                  curl \
+                  htop \
+                  sudo \
+                  iproute2 \
+                  iputils-ping"
+
+RUN apt-get install -y ${DEPENDENCIES} && \
+    rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
+
+ADD etc_client/ssh/ssh_known_hosts /etc/ssh/ssh_known_hosts
+
+CMD ["python3", "-m", "http.server"]
+
+
