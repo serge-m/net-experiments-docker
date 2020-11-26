@@ -139,5 +139,6 @@ Match User tunnel_user
   AllowTcpForwarding yes
   X11Forwarding no
   AllowAgentForwarding no
+  GatewayPorts clientspecified
   ForceCommand /bin/false
 
